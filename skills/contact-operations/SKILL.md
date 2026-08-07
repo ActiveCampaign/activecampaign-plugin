@@ -1,6 +1,8 @@
 ---
 name: contact-operations
 description: Manage contacts, lists, tags, segments, and custom fields. Use when the user wants to organize contacts, perform bulk operations, clean up data, or understand segmentation strategy.
+license: MIT
+compatibility: Requires a connection to your ActiveCampaign account's MCP server (ActiveCampaign > Settings > Developer > MCP).
 allowed-tools: Read, Grep, Glob, mcp__activecampaign__list_contacts, mcp__activecampaign__get_contact, mcp__activecampaign__get_contact_tags, mcp__activecampaign__get_contact_list_memberships, mcp__activecampaign__list_tags, mcp__activecampaign__get_tag, mcp__activecampaign__list_lists, mcp__activecampaign__get_list, mcp__activecampaign__list_contact_custom_fields, mcp__activecampaign__get_contact_custom_field, mcp__activecampaign__list_contact_field_values, mcp__activecampaign__get_contact_field_value, mcp__activecampaign__list_groups, mcp__activecampaign__list_automations
 ---
 
