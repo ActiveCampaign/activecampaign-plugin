@@ -1,14 +1,15 @@
-# ActiveCampaign Plugin for Claude
+# ActiveCampaign Agent Plugin
 
-Bring your ActiveCampaign marketing automation, CRM, and email marketing into Claude. This plugin adds ActiveCampaign domain expertise, guided workflows, intelligent reporting, and safe write operations on top of ActiveCampaign's MCP server, so Claude can analyze your account, plan your marketing, and make changes for you, all in plain conversation.
+Bring your ActiveCampaign marketing automation, CRM, and email marketing into your AI agent. This plugin adds ActiveCampaign domain expertise, guided workflows, intelligent reporting, and safe write operations on top of ActiveCampaign's MCP server, so your agent can analyze your account, plan your marketing, and make changes for you, all in plain conversation.
 
-**Works with both Claude Code and Claude Co-Work.**
+**Packaged in the open [Agent Plugins](https://agent-plugins.org/) format.** The full experience runs in Claude Code and Claude Co-Work; the skills and MCP connection are portable to any client that supports [Agent Skills](https://agentskills.io/) and MCP — including Codex and Cursor. See [Compatibility](#compatibility).
 
 ---
 
 ## Table of Contents
 
 - [What's in the Plugin](#whats-in-the-plugin)
+- [Compatibility](#compatibility)
 - [What the Plugin Can and Can't Do](#what-the-plugin-can-and-cant-do)
 - [Setup](#setup)
 - [How It Works](#how-it-works)
@@ -55,6 +56,23 @@ Type these directly. They produce read-only reports.
 
 ---
 
+## Compatibility
+
+This repository follows the [Agent Plugins specification v1.0.0](https://agent-plugins.org/) — an open, vendor-neutral format for packaging agent extensions.
+
+| Component | Portability | Notes |
+|-----------|-------------|-------|
+| `plugin.json` | Portable ([Agent Plugins](https://agent-plugins.org/) manifest) | Identifies the plugin for any compliant client |
+| `skills/` | Portable ([Agent Skills](https://agentskills.io/)) | The six skills work in any skills-capable client — Claude, Codex, Cursor, and others |
+| MCP connection | Per-client setup | Your MCP server URL is unique to your account, so each client configures it directly (see [Setup](#setup)) |
+| `commands/` | Claude Code only | Slash commands aren't part of the portable standard yet |
+| `agents/` | Claude Code only | Subagents aren't part of the portable standard yet |
+| `.claude-plugin/`, `.mcp.json` | Claude Code only | Claude Code's native plugin manifest and MCP config |
+
+The plugin intentionally ships no portable `mcp.json`: the Agent Plugins v1 MCP format requires a fixed server URL, and your ActiveCampaign MCP Server URL is per-account. Claude Code collects the URL at install time; other clients add the server through their own MCP configuration.
+
+---
+
 ## What the Plugin Can and Can't Do
 
 ### Can read
@@ -77,20 +95,53 @@ Every change follows a **read → preview → confirm → execute → verify** f
 
 ## Setup
 
+Every setup path needs your **ActiveCampaign MCP Server URL**. Find it in your ActiveCampaign account under **Settings > Developer > MCP**. It looks like `https://yoursubdomain.activehosted.com/api/agents/mcp/http`.
+
+### Claude Code / Claude Co-Work
+
 1. **Install** the ActiveCampaign plugin.
-2. **Enter your ActiveCampaign MCP Server URL** when prompted. Find it in your ActiveCampaign account under **Settings > Developer > MCP**. It looks like `https://yoursubdomain.activehosted.com/api/agents/mcp/http`.
+2. **Enter your ActiveCampaign MCP Server URL** when prompted.
 3. **Authorize** Claude to access your ActiveCampaign account (OAuth).
 4. **Start using it** — ask a question, run a command, or ask Claude to set something up.
+
+### Codex, Cursor, and other Agent Skills clients
+
+The portable pieces are the six skills and the MCP connection:
+
+1. **Install the skills.** Each folder under `skills/` is a self-contained [Agent Skill](https://agentskills.io/). Copy the folders into your client's skills directory (for example `~/.codex/skills/` for Codex — check your client's documentation for the exact location).
+2. **Connect the MCP server** through your client's MCP configuration, using your account's URL. For example, in Cursor's `mcp.json`:
+
+   ```json
+   {
+     "mcpServers": {
+       "activecampaign": {
+         "url": "https://yoursubdomain.activehosted.com/api/agents/mcp/http"
+       }
+     }
+   }
+   ```
+
+   Or in Codex's `~/.codex/config.toml`:
+
+   ```toml
+   [mcp_servers.activecampaign]
+   url = "https://yoursubdomain.activehosted.com/api/agents/mcp/http"
+   ```
+
+   Syntax varies by client and version — see your client's MCP documentation.
+3. **Authorize** access (OAuth) when your client first connects to the server.
+
+> The `/activecampaign:*` commands and the two agents are Claude Code features and won't appear in other clients; the skills carry the core expertise everywhere.
 
 ---
 
 ## How It Works
 
-The plugin connects Claude to ActiveCampaign through ActiveCampaign's MCP server. From there:
+The plugin connects your agent to ActiveCampaign through ActiveCampaign's MCP server. From there:
 
-- **Skills** add ActiveCampaign expertise so Claude uses the right data in the right order, with marketing best practices built in.
-- **Commands** run pre-built reporting workflows.
-- **Agents** handle multi-step tasks.
+- **Skills** add ActiveCampaign expertise so the agent uses the right data in the right order, with marketing best practices built in.
+- **Commands** run pre-built reporting workflows (Claude Code).
+- **Agents** handle multi-step tasks (Claude Code).
 
 Reading your data is seamless. Anything that **changes** your account is always previewed for your confirmation first and gated by a permission prompt — so nothing is modified without your explicit go-ahead.
 

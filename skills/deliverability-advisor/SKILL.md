@@ -1,6 +1,8 @@
 ---
 name: deliverability-advisor
 description: Diagnose and fix email deliverability issues. Use when the user mentions emails going to spam, high bounce rates, domain authentication (SPF/DKIM/DMARC), or sender reputation problems.
+license: MIT
+compatibility: Requires a connection to your ActiveCampaign account's MCP server (ActiveCampaign > Settings > Developer > MCP).
 allowed-tools: Read, Grep, Glob, mcp__activecampaign__list_campaigns, mcp__activecampaign__get_campaign, mcp__activecampaign__list_email_activities, mcp__activecampaign__list_contacts, mcp__activecampaign__get_contact, mcp__activecampaign__list_lists, mcp__activecampaign__list_tags
 ---
 

@@ -1,6 +1,8 @@
 ---
 name: campaign-strategist
 description: Plan, create, optimize, and troubleshoot email campaigns. Use when the user wants to send a campaign, plan email content, choose audiences, or improve campaign performance.
+license: MIT
+compatibility: Requires a connection to your ActiveCampaign account's MCP server (ActiveCampaign > Settings > Developer > MCP).
 allowed-tools: Read, Grep, Glob, mcp__activecampaign__list_campaigns, mcp__activecampaign__get_campaign, mcp__activecampaign__get_campaign_links, mcp__activecampaign__list_contacts, mcp__activecampaign__get_contact, mcp__activecampaign__list_lists, mcp__activecampaign__list_tags, mcp__activecampaign__list_contact_custom_fields, mcp__activecampaign__list_contact_field_values, mcp__activecampaign__list_email_activities, mcp__activecampaign__list_automations, mcp__activecampaign__list_contact_automations
 ---
 
