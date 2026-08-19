@@ -7,6 +7,7 @@ This project follows [Semantic Versioning](https://semver.org/).
 
 ### Added
 - **Portable `plugin.json` manifest** at the repo root, conforming to the open [Agent Plugins specification v1.0.0](https://agent-plugins.org/), so the plugin is recognizable by any compliant client — not just Claude.
+- **Portable `mcp.json`** at the repo root (Agent Plugins v1.0.0 MCP config) connecting compliant clients to ActiveCampaign's shared MCP endpoint, `https://mcp.app-us1.com/http`, via streamable HTTP; OAuth links the connection to your account on first use.
 - `license` and `compatibility` frontmatter on all six skills per the [Agent Skills specification](https://agentskills.io/), flagging the ActiveCampaign MCP server requirement for clients installing the skills standalone.
 - README: compatibility matrix (portable vs. Claude Code-specific components) and setup instructions for Codex, Cursor, and other Agent Skills / MCP clients.
 
@@ -14,8 +15,7 @@ This project follows [Semantic Versioning](https://semver.org/).
 - README reframed from Claude-only to the cross-client Agent Plugins format.
 
 ### Notes
-- No portable `mcp.json` is shipped: the Agent Plugins v1 MCP format requires a fixed server URL, and ActiveCampaign MCP Server URLs are per-account. Claude Code continues to collect the URL via `userConfig`; other clients configure the MCP server directly (see README Setup).
-- Claude Code behavior is unchanged — `.claude-plugin/plugin.json`, `.mcp.json`, commands, agents, and skills all work exactly as in 0.2.0.
+- Claude Code behavior is unchanged — `.claude-plugin/plugin.json`, `.mcp.json` (per-account URL via `userConfig`), commands, agents, and skills all work exactly as in 0.2.0. The portable `mcp.json` is used by Agent Plugins-compatible clients; Agent Skills-only clients configure the MCP server manually (see README Setup).
 
 ## [0.2.0] — launch preparation
 

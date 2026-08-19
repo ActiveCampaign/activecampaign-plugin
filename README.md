@@ -64,12 +64,12 @@ This repository follows the [Agent Plugins specification v1.0.0](https://agent-p
 |-----------|-------------|-------|
 | `plugin.json` | Portable ([Agent Plugins](https://agent-plugins.org/) manifest) | Identifies the plugin for any compliant client |
 | `skills/` | Portable ([Agent Skills](https://agentskills.io/)) | The six skills work in any skills-capable client — Claude, Codex, Cursor, and others |
-| MCP connection | Per-client setup | Your MCP server URL is unique to your account, so each client configures it directly (see [Setup](#setup)) |
+| `mcp.json` | Portable ([Agent Plugins](https://agent-plugins.org/) MCP config) | Connects compliant clients to ActiveCampaign's shared MCP endpoint; OAuth links it to your account |
 | `commands/` | Claude Code only | Slash commands aren't part of the portable standard yet |
 | `agents/` | Claude Code only | Subagents aren't part of the portable standard yet |
 | `.claude-plugin/`, `.mcp.json` | Claude Code only | Claude Code's native plugin manifest and MCP config |
 
-The plugin intentionally ships no portable `mcp.json`: the Agent Plugins v1 MCP format requires a fixed server URL, and your ActiveCampaign MCP Server URL is per-account. Claude Code collects the URL at install time; other clients add the server through their own MCP configuration.
+The portable `mcp.json` points at ActiveCampaign's shared MCP endpoint (`https://mcp.app-us1.com/http`); OAuth authorization links the connection to your account on first use. Claude Code uses its own `.mcp.json` and collects your account-specific MCP Server URL at install time. Clients that support Agent Skills but not the full plugin format can add the server manually (see [Setup](#setup)).
 
 ---
 
@@ -95,27 +95,29 @@ Every change follows a **read → preview → confirm → execute → verify** f
 
 ## Setup
 
-Every setup path needs your **ActiveCampaign MCP Server URL**. Find it in your ActiveCampaign account under **Settings > Developer > MCP**. It looks like `https://yoursubdomain.activehosted.com/api/agents/mcp/http`.
-
 ### Claude Code / Claude Co-Work
 
 1. **Install** the ActiveCampaign plugin.
-2. **Enter your ActiveCampaign MCP Server URL** when prompted.
+2. **Enter your ActiveCampaign MCP Server URL** when prompted. Find it in your ActiveCampaign account under **Settings > Developer > MCP**. It looks like `https://yoursubdomain.activehosted.com/api/agents/mcp/http`.
 3. **Authorize** Claude to access your ActiveCampaign account (OAuth).
 4. **Start using it** — ask a question, run a command, or ask Claude to set something up.
 
+### Agent Plugins-compatible clients
+
+If your client supports the [Agent Plugins](https://agent-plugins.org/) format, install the plugin and you're set: the bundled `mcp.json` connects to ActiveCampaign's shared MCP endpoint (`https://mcp.app-us1.com/http`), and OAuth links it to your account on first use.
+
 ### Codex, Cursor, and other Agent Skills clients
 
-The portable pieces are the six skills and the MCP connection:
+If your client supports skills but not the full plugin format, the portable pieces are the six skills and the MCP connection:
 
 1. **Install the skills.** Each folder under `skills/` is a self-contained [Agent Skill](https://agentskills.io/). Copy the folders into your client's skills directory (for example `~/.codex/skills/` for Codex — check your client's documentation for the exact location).
-2. **Connect the MCP server** through your client's MCP configuration, using your account's URL. For example, in Cursor's `mcp.json`:
+2. **Connect the MCP server** through your client's MCP configuration, using the shared endpoint. For example, in Cursor's `mcp.json`:
 
    ```json
    {
      "mcpServers": {
        "activecampaign": {
-         "url": "https://yoursubdomain.activehosted.com/api/agents/mcp/http"
+         "url": "https://mcp.app-us1.com/http"
        }
      }
    }
@@ -125,10 +127,10 @@ The portable pieces are the six skills and the MCP connection:
 
    ```toml
    [mcp_servers.activecampaign]
-   url = "https://yoursubdomain.activehosted.com/api/agents/mcp/http"
+   url = "https://mcp.app-us1.com/http"
    ```
 
-   Syntax varies by client and version — see your client's MCP documentation.
+   Syntax varies by client and version — see your client's MCP documentation. Your account-specific MCP URL (**Settings > Developer > MCP** in ActiveCampaign) works here too.
 3. **Authorize** access (OAuth) when your client first connects to the server.
 
 > The `/activecampaign:*` commands and the two agents are Claude Code features and won't appear in other clients; the skills carry the core expertise everywhere.
