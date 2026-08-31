@@ -1,7 +1,7 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "activecampaign",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "Marketing automation, CRM, and email marketing powered by ActiveCampaign. Manage contacts, campaigns, automations, deals, and get AI-powered marketing insights from your AI agent.",
   "author": {
     "name": "ActiveCampaign",
