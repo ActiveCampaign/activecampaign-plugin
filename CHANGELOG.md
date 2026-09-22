@@ -3,7 +3,7 @@
 All notable changes to the ActiveCampaign plugin are documented here.
 This project follows [Semantic Versioning](https://semver.org/).
 
-## [Unreleased]
+## [0.3.2] — Cursor support and campaign creation
 
 ### Added
 - **Cursor support.** The plugin now installs as a full plugin in Cursor, with the ActiveCampaign skills and the MCP connection included. Sign in with your ActiveCampaign login on first use; no account URL to look up.
