@@ -3,6 +3,7 @@
   "displayName": "ActiveCampaign",
   "version": "0.3.1",
   "description": "Marketing automation, CRM, and email marketing powered by ActiveCampaign. Manage contacts, campaigns, automations, deals, and get AI-powered marketing insights from your AI agent.",
+  "logo": "./assets/activecampaign-icon.svg",
   "author": {
     "name": "ActiveCampaign",
     "email": "amurrey@activecampaign.com",
@@ -11,5 +12,13 @@
   "homepage": "https://www.activecampaign.com",
   "repository": "https://github.com/ActiveCampaign/activecampaign-plugin",
   "license": "MIT",
-  "keywords": ["marketing", "automation", "crm", "email", "campaigns", "deals", "contacts"]
+  "keywords": [
+    "marketing",
+    "automation",
+    "crm",
+    "email",
+    "campaigns",
+    "deals",
+    "contacts"
+  ]
 }
