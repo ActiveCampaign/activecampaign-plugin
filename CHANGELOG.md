@@ -6,8 +6,8 @@ This project follows [Semantic Versioning](https://semver.org/).
 ## [Unreleased]
 
 ### Added
-- **Cursor plugin manifest** at `.cursor-plugin/plugin.json` so Cursor loads the repo as a full plugin (skills plus the bundled `mcp.json` connection to the shared MCP endpoint) instead of a skills-only pack. No change to Claude Code or Agent Plugins behavior.
-- **Official ActiveCampaign icon** in `assets/` (brand glyph in circle, SVG plus 612px PNG, from the ActiveCampaign brand site) and referenced as the Cursor manifest `logo`, so marketplace listings show the ActiveCampaign mark.
+- **Cursor support.** The plugin now installs as a full plugin in Cursor, with the ActiveCampaign skills and the MCP connection included. Sign in with your ActiveCampaign login on first use; no account URL to look up.
+- **ActiveCampaign icon** so marketplace listings show the official ActiveCampaign mark.
 
 ## [0.3.1] — claude.ai loader compatibility
 
