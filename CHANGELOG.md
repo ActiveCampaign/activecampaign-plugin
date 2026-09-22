@@ -3,6 +3,11 @@
 All notable changes to the ActiveCampaign plugin are documented here.
 This project follows [Semantic Versioning](https://semver.org/).
 
+## [Unreleased]
+
+### Added
+- **Cursor plugin manifest** at `.cursor-plugin/plugin.json` so Cursor loads the repo as a full plugin (skills plus the bundled `mcp.json` connection to the shared MCP endpoint) instead of a skills-only pack. No change to Claude Code or Agent Plugins behavior.
+
 ## [0.3.1] — claude.ai loader compatibility
 
 ### Fixed
